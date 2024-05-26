@@ -4,12 +4,6 @@ EXEC sp_AgregarEvento 'Bisontes vs Lechuzas','El esperado partido de fútbol amer
 
 EXEC sp_MotrarEventos
 
-CREATE TABLE Prueba(
-	ID int primary key identity,
-	Titulo varchar(100) not null,
-	Descripcion varchar(max) not null,
-	)
-
 EXEC sp_EliminarDependencia 
 
 EXEC sp_AgregarRecinto 
@@ -26,3 +20,5 @@ EXEC sp_EliminarRecinto 1008
 EXEC sp_MotrarUsuarios
 
 EXEC sp_AgregarUsuario 'ADMIN CARLOS','GARCIA','HERRERA','carloseduardogarher@gmail.com','Carlos1',1,2
+
+EXEC sp_EliminarUsuario 1002

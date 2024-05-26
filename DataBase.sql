@@ -1,11 +1,6 @@
 --CREATE DATABASE eventosUanl_bd
 
 --USE eventosUanl_bd
---Tabla Para los SP
-Alter TYPE CostosArray AS TABLE
-(
-    Costo MONEY
-);
 
 --Tabla Recintos
 CREATE TABLE Recintos(
@@ -49,6 +44,7 @@ CREATE TABLE Eventos(
 	RecintoID int not null,
 	DependenciaID int not null,
 	CategoriaID int not null,
+	Visible bit
 	foreign key (RecintoID) references Recintos(RecintoID),
 	foreign key (DependenciaID) references Dependencias(DependenciaID),
 	foreign key (CategoriaID) references Categorias(CategoriaID),
@@ -122,9 +118,8 @@ CREATE TABLE Costos(
     Costo money not null,
 	Descripcion varchar(100) not null,
 	EventoID int not null,
-	foreign key (EventoID) references Eventos(EventoID)
-
-	--COSTO MENOR A CERO
+	foreign key (EventoID) references Eventos(EventoID),
+	constraint  CHK_Costo CHECK (Costo >= 0)
 )
 
 

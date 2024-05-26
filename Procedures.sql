@@ -1,4 +1,4 @@
-
+USE eventosUanl_bd
 --AGREGAR----------------------------------------------------------------------------
 --SP para el registro de un Nuevo Evento
 CREATE OR ALTER PROCEDURE sp_AgregarEvento
@@ -90,7 +90,7 @@ CREATE OR ALTER PROCEDURE sp_MotrarEventos
 AS
 
 BEGIN
-	SELECT Eventos.EventoID, Eventos.Titulo, Categorias.Categoria, Dependencias.Dependencia, Recintos.Recinto, Eventos.Fecha, Eventos.Descripcion, Costos.Costo FROM Eventos
+	SELECT Eventos.EventoID, Eventos.Titulo, Categorias.Categoria, Dependencias.Dependencia, Recintos.Recinto, Eventos.Fecha, Eventos.Descripcion FROM Eventos
 	JOIN Categorias ON Eventos.CategoriaID=Categorias.CategoriaID
 	JOIN Recintos ON Eventos.RecintoID=Recintos.RecintoID
 	JOIN Dependencias ON Eventos.DependenciaID=Dependencias.DependenciaID
