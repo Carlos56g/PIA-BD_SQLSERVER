@@ -61,7 +61,7 @@ CREATE TABLE Usuarios(
 	Nombre varchar(100) not null,
 	ApellidoPaterno varchar(100) not null,
 	ApellidoMaterno varchar(100),
-	Correo varchar(100) not null,
+	Correo varchar(100) not null unique,
 	Contraseña varchar(100),
 	RolID int not null,
 	DependenciaID int not null,

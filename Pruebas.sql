@@ -10,3 +10,19 @@ CREATE TABLE Prueba(
 	Descripcion varchar(max) not null,
 	)
 
+EXEC sp_EliminarDependencia 
+
+EXEC sp_AgregarRecinto 
+
+EXEC sp_ModificarRecinto
+
+EXEC sp_AgregarRecinto 'Recinto Prueba50', 'Jazmin 140', 50
+
+
+
+EXEC sp_EliminarRecinto 1008
+
+
+EXEC sp_MotrarUsuarios
+
+EXEC sp_AgregarUsuario 'ADMIN CARLOS','GARCIA','HERRERA','carloseduardogarher@gmail.com','Carlos1',1,2

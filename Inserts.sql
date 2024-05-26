@@ -10,6 +10,8 @@ INSERT INTO Recintos (Recinto, Direccion, Capacidad) VALUES
 
 -- Tabla Dependencias
 INSERT INTO Dependencias (Dependencia) VALUES
+('ADMIN'),
+('NA'),
 ('Facultad de Ciencias Fisico Matematicas'),
 ('Facultad de Medicina'),
 ('Facultad de Ciencias Químicas'),
