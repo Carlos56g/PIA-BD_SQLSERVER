@@ -69,14 +69,14 @@ CREATE OR ALTER PROCEDURE sp_AgregarUsuario
 	@ApellidoPaterno varchar(100),
 	@ApellidoMaterno varchar(100),
 	@Correo varchar(100),
-	@Contraseña varchar(100),
+	@ContraseÃ±a varchar(100),
 	@RolID int,
 	@DependenciaID int
 AS
 
 BEGIN
 	--Insertamos al usario en su Tabla Correspondiente
-	INSERT INTO Usuarios(Nombre,ApellidoPaterno,ApellidoMaterno,Correo,Contraseña,RolID,DependenciaID) VALUES(@Nombre,@ApellidoPaterno,@ApellidoMaterno,@Correo,@Contraseña,@RolID,@DependenciaID)
+	INSERT INTO Usuarios(Nombre,ApellidoPaterno,ApellidoMaterno,Correo,ContraseÃ±a,RolID,DependenciaID) VALUES(@Nombre,@ApellidoPaterno,@ApellidoMaterno,@Correo,@ContraseÃ±a,@RolID,@DependenciaID)
 END
 GO
 
@@ -210,12 +210,25 @@ CREATE OR ALTER PROCEDURE sp_EliminarEvento
 		AS
 
 		BEGIN	
-			DECLARE @Limite INT
+			DECLARE @LimiteE INT
 			DECLARE @i INT= 0
 			DECLARE @EventoID INT
-			SELECT @Limite = COUNT(*) FROM Eventos WHERE (DependenciaID=@DependenciaID);
+			DECLARE @UsuarioID INT
+			DECLARE @LimiteU INT
+			DECLARE @i2 INT= 0
+
+			--ELIMINA TODOS LOS USUARIOS DE ESA DEPENDENCIA
+			SELECT @LimiteU = COUNT(*) FROM Usuarios WHERE (DependenciaID=@DependenciaID);
+			SELECT TOP 1 @UsuarioID = UsuarioID FROM Usuarios WHERE (DependenciaID=@DependenciaID);
+			WHILE (@i<@LimiteU) BEGIN
+				EXEC sp_EliminarUsuario @UsuarioID
+				SELECT TOP 1 @UsuarioID = UsuarioID FROM Usuarios WHERE (DependenciaID=@DependenciaID);
+				SET  @i2=@i2+1
+			END
+			--ELIMINA TODOS LOS EVENTOS DE ESA DEPENDENCIA
+			SELECT @LimiteE = COUNT(*) FROM Eventos WHERE (DependenciaID=@DependenciaID);
 			SELECT TOP 1 @EventoID = EventoID FROM Eventos WHERE (DependenciaID=@DependenciaID);
-			WHILE (@i<@Limite) BEGIN
+			WHILE (@i<@LimiteE) BEGIN
 				EXEC sp_EliminarEvento @EventoID;
 				SELECT TOP 1 @EventoID = EventoID FROM Eventos WHERE DependenciaID = @DependenciaID AND EventoID > @EventoID;
 				SET  @i=@i+1
